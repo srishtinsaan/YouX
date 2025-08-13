@@ -17,7 +17,7 @@ const registerUser = asyncHandler( async (req , res) =>{
     // sends true if any one field is empty 
 
 
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or : [{username}, {email}]
     })
     
@@ -52,7 +52,7 @@ const registerUser = asyncHandler( async (req , res) =>{
     })
 
 
-    const createdUser = User.findById(user._id).select(
+    const createdUser = await User.findById(user._id).select(
         // ye likho jo jo nahi chahiye
         "-password -refreshToken"
     )
